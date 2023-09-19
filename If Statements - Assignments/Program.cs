@@ -13,7 +13,8 @@ namespace If_Statements___Assignments
         {    // Raihan Carder
 
             Console.Title = "Menu";
-            SimpleBankingMachine();
+            ParkingGarage();
+            //SimpleBankingMachine();
             Console.Clear();
             Console.WriteLine("Welcome to the Menu");
             Console.ReadLine();
@@ -134,6 +135,50 @@ namespace If_Statements___Assignments
 
         public static void ParkingGarage()
         {
+            int parkingMinutes, parkingHours, bill = 0;
+            bool validTime = false; 
+
+
+            Console.Title = "Parking Garage";
+            while (validTime == false)
+            {
+                Console.Write("Enter how long you parked for in minutes: ");
+                if (int.TryParse(Console.ReadLine(), out parkingMinutes) && parkingMinutes > 0)
+                {
+                    validTime = true;
+                    Console.WriteLine("Valid input obtained, rounded to the next hour.");
+                    parkingHours = (int)Math.Ceiling((double)parkingMinutes / 60);
+                    Console.WriteLine($"You have parked for {parkingHours} hour(s).");
+
+                    if (parkingHours > 1 && parkingHours < 9)
+                    {
+                        bill = (parkingHours-1) * 2 + 4;
+                    }
+                    else if (parkingHours == 1)
+                    {
+                        bill = 4;
+                    }
+                    else if (parkingHours >= 9)
+                    {
+                        bill = 20;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error");
+                        
+                    }
+
+                    Console.WriteLine($"Your bill totals to: ${bill}.");
+
+                }
+                else
+                {
+                    Console.WriteLine("Invalid time, make sure it is in positive integers only.");              
+                }
+            }
+            validTime = false;
+            Console.ReadLine();
+
 
         }
     }
