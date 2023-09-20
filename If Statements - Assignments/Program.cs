@@ -1,7 +1,10 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data.SqlTypes;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,12 +14,56 @@ namespace If_Statements___Assignments
     {
         static void Main(string[] args)
         {    // Raihan Carder
+            int option = 0;
+            bool menu = false, validOption;
 
-            Console.Title = "Menu";
-            ParkingGarage();
-            //SimpleBankingMachine();
-            Console.Clear();
-            Console.WriteLine("Welcome to the Menu");
+            while (menu == false)
+            {
+                validOption = false;
+                Console.Title = "Menu";
+                Console.WriteLine("Welcome to the Menu");
+                Console.WriteLine();
+                while (!validOption)
+                {
+                    Console.WriteLine("Which program would you like to explore?");
+                    Console.WriteLine("1. Bank of Blorg, 2. Parking Ticket, 3. Hurricanes, 4. Quit");
+                    Console.Write("Please type the number corresponding with your option: ");
+                    if (int.TryParse(Console.ReadLine(), out option))
+                    {
+                        Console.Clear();
+                        if (option == 1)
+                        {    
+                            validOption = true;
+                            SimpleBankingMachine();
+                        }
+                        else if (option == 2)
+                        {
+                            validOption = true;
+                            ParkingGarage();
+                        }
+                        else if (option == 3)
+                        {
+                            validOption = true;
+                            Hurricane();
+                        }
+                        else if (option ==4)
+                        {
+                            validOption = true;
+                            menu = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("ERROR, please select a value within the range.");
+                        }
+                    }
+                    else
+                    {
+                        Console.Clear() ;
+                        Console.WriteLine("ERROR, please select a valid  value within the range.");
+                    }
+                }
+            }
+
             Console.ReadLine();
 
 
@@ -53,7 +100,7 @@ namespace If_Statements___Assignments
                         bankAccount = depositAmount + bankAccount - 0.75;
                         Console.WriteLine($"Your new bank amount is: ${bankAccount}.");
                         Console.WriteLine("Sorry, but you're allowed one service per session. To Quit click enter.");
-                        Console.ReadLine();
+
                     }
                     else
                     {
@@ -61,7 +108,7 @@ namespace If_Statements___Assignments
                         bankAccount -= 0.75;
                         Console.WriteLine($"Your new balance is ${bankAccount}.");
                         Console.WriteLine("We only allow one service per session. To quit Click enter");
-                        Console.ReadLine();
+
                         
                     }
 
@@ -77,7 +124,7 @@ namespace If_Statements___Assignments
                         bankAccount = bankAccount - withdrawal - 0.75;
                         Console.WriteLine($"Your new bank amount is: ${bankAccount}.");
                         Console.WriteLine("Sorry, but you're allowed one service per session. To Quit click enter.");
-                        Console.ReadLine();
+
                     }
                     else
                     {
@@ -85,7 +132,7 @@ namespace If_Statements___Assignments
                         bankAccount -= 0.75;
                         Console.WriteLine($"Your new balance is ${bankAccount}.");
                         Console.WriteLine("We only allow one service per session. To quit Click enter");
-                        Console.ReadLine();
+
 
                     }
 
@@ -101,7 +148,7 @@ namespace If_Statements___Assignments
                         bankAccount = bankAccount - billPayment - 0.75;
                         Console.WriteLine($"Your new bank amount is: ${bankAccount}.");
                         Console.WriteLine("Sorry, but you're allowed one service per session. To Quit click enter.");
-                        Console.ReadLine();
+
                     }
                     else
                     {
@@ -109,7 +156,7 @@ namespace If_Statements___Assignments
                         bankAccount -= 0.75;
                         Console.WriteLine($"Your new balance is ${bankAccount}.");
                         Console.WriteLine("We only allow one service per session. To quit Click enter");
-                        Console.ReadLine();
+
 
                     }
                 }
@@ -119,7 +166,6 @@ namespace If_Statements___Assignments
                     bankAccount -= 0.75;
                     Console.WriteLine($"Your new account balance is {bankAccount}");
                     Console.WriteLine("Sorry but we only allow one service per session. To Quit click enter.");
-                    Console.ReadLine(); 
                 }
                 else
                 {
@@ -131,6 +177,8 @@ namespace If_Statements___Assignments
                 }
             }
             validSelection = false;
+            Console.ReadLine ();
+            Console.Clear();
         }
 
         public static void ParkingGarage()
@@ -178,8 +226,60 @@ namespace If_Statements___Assignments
             }
             validTime = false;
             Console.ReadLine();
-
-
+            Console.Clear();
         }
+        public static void Hurricane()
+        {
+            int hurricane;
+            bool valid = false;
+
+           
+                Console.Title = "Hurricanes";
+                Console.WriteLine("Hurricane Wind Speed Reader") ;
+                Console.WriteLine();
+                while (!valid)
+                {
+                    Console.Write("Which category hurricane would you like to see the wind speeds for (1-5): ");
+                if (int.TryParse(Console.ReadLine(), out hurricane))
+                {
+                    switch (hurricane)
+                    {
+                        case 1:
+                            Console.WriteLine("Category 1 wind speeds are: 74-95 mph or 64-82 kt or 119-153km/hr");
+                            valid = true;
+                            break;
+
+                        case 2:
+                            Console.WriteLine("Category 2 wind speeds are: 96-110 mph or 83-95 kt or 154-177 km/hr");
+                            valid = true;
+
+                            break;
+                        case 3:
+                            Console.WriteLine("Category 3 wind speeds are: 111-130 mph or 96-113 kt or 210-249 km/hr");
+                            valid = true;
+                            break;
+                        case 4:
+                            Console.WriteLine("Category 4 wind speeds are: 131-155 or 114-135 kt or 210-249 km/hr");
+                            valid = true;
+                            break;
+                        case 5:
+                            Console.WriteLine("Category 5 wind speeds are: greater than 155 mph or 135 kt or 249km/hr");
+                            valid = true;
+                            break;
+                        default:
+                            Console.WriteLine("There's no hurricane over category 5.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Error, Please enter a valid category hurricane");
+                }
+            }
+            valid = true;
+            Console.ReadLine();
+            Console.Clear();
+        }
+
     }
 }
